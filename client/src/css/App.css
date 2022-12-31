@@ -1,0 +1,15 @@
+@import '../components/NavHeader/index.css';
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.App .main{
+  width: 1200px;
+  margin: 70px auto 0;
+}
