@@ -1,7 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Input, Select } from 'antd';
-function index() {
+import LoginBtn from '../LoginBtn'
+import './index.css';
+
+function index(props) {
   return (
     <div className='header-container'>
       <div className="header">
@@ -11,7 +14,7 @@ function index() {
         <nav className='header-nav'>
           <NavLink className="header-nav-item" to='/'>问答</NavLink>
           <NavLink className="header-nav-item" to='/books'>书籍</NavLink>
-          <NavLink className="header-nav-item" to='/interviews'>面试</NavLink>
+          <NavLink className="header-nav-item" to='/interviews'>面试题</NavLink>
         </nav>
         <div className="search">
           <Input.Group compact>
@@ -22,8 +25,8 @@ function index() {
             <Input.Search style={{ width: '80%' }} defaultValue="" placeholder='请输入要搜索的内容' allowClear enterButton='搜索' size="large" />
           </Input.Group>
         </div>
-        <div className="login">
-          
+        <div className="login-btn">
+          <LoginBtn openLoginForm={props.openLoginForm} />
         </div>
       </div>
     </div>

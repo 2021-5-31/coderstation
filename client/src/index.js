@@ -5,12 +5,16 @@ import zhCN from 'antd/locale/zh_CN';
 import 'antd/dist/reset.css';
 import { ConfigProvider } from "antd";
 import { BrowserRouter } from 'react-router-dom'
+import store from './redux/store'
+import { Provider } from 'react-redux'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ConfigProvider locale={zhCN}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ConfigProvider>
+  <Provider store={store}>
+    <ConfigProvider locale={zhCN}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ConfigProvider>
+  </Provider>
 );
