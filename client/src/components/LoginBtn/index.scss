@@ -3,8 +3,15 @@
   display: flex;
   .user-name{
     margin-right: 10px;
+    width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .arrow-right{
     cursor: pointer;
   }
+}
+.user-list-item{
+  cursor: pointer;
 }

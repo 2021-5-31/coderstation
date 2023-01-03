@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Modal, Radio, Button, Checkbox, Form, Input, Row, Col } from 'antd'
-import { getCaptchaApi } from '../../api/user'
+import { Modal, Radio, Button, Checkbox, Form, Input, Row, Col, message } from 'antd'
+import { getCaptchaApi, checkRegisterIdApi, addUserApi, userLoginApi, getUserInfoApi } from '../../api/user'
 import './index.scss'
+import { initUserInfo, updateLoginStatus } from '../../redux/userSlice'
+import { useDispatch } from 'react-redux'
 
 function Index(props) {
   const handleOk = () => {
@@ -21,6 +23,8 @@ function Index(props) {
   })
   const [captcha, setCaptcha] = useState('')
   const loginFormRef = useRef()
+  const registerFormRef = useRef()
+  const dispatch = useDispatch()
   const handleRadioChange = ({ target }) => {
     setRadioValue(target.value)
     getCaptcha()
@@ -34,14 +38,65 @@ function Index(props) {
     const res = await getCaptchaApi()
     setCaptcha(res)
   }
-  useEffect(() => {
-    getCaptcha()
-  },[props.openLoginForm])
-  const onFinish = () => {
-
+  const checkRegisterId = async () => {
+    if (registerInfo.loginId) {
+      const res = await checkRegisterIdApi(registerInfo.loginId)
+      if (res.code === 0 && res.data) {
+        return Promise.reject('该用户已存在')
+      }
+    }
   }
-  const onFinishFailed = () => {
-
+  // useEffect(() => {
+  //   getCaptcha()
+  // }, [props.openLoginForm])
+  const handleRegister = async () => {
+    const res = await addUserApi(registerInfo)
+    if (res.code === 0) {
+      message.success('注册成功，用户默认密码为123456')
+      dispatch(initUserInfo(res.data))
+      dispatch(updateLoginStatus(true))
+      closeLoginForm()
+    } else {
+      message.error(res.msg)
+      getCaptcha()
+    }
+  }
+  const handleLogin = async () => {
+    const res = await userLoginApi(userInfo)
+    if (res.code === 0) {
+      if (res.data.data) {
+        if (res.data.data.enabled) {
+          const resp = await getUserInfoApi(res.data.data._id)
+          if (resp.code === 0) {
+            dispatch(initUserInfo(resp.data))
+            dispatch(updateLoginStatus(true))
+            closeLoginForm()
+            localStorage.setItem('coderstation-user-token', res.data.token)
+          }
+        } else {
+          message.error('账号被冻结，请联系管理员')
+        }
+      } else {
+        message.error('账号或密码不正确')
+      }
+    } else {
+      message.error(res.msg)
+      getCaptcha()
+    }
+  }
+  const closeLoginForm = () => {
+    setUserInfo({
+      loginId: "",
+      loginPwd: "",
+      captcha: "",
+      remember: false
+    })
+    setRegisterInfo({
+      loginId: "",
+      nickname: "",
+      captcha: ""
+    })
+    props.closeLoginForm()
   }
   let form = null
   if (radioValue === 1) {
@@ -54,11 +109,7 @@ function Index(props) {
         wrapperCol={{
           span: 20,
         }}
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        onFinish={handleLogin}
         autoComplete="off"
         ref={loginFormRef}
       >
@@ -104,7 +155,7 @@ function Index(props) {
               />
             </Col>
             <Col span={8}>
-              <div dangerouslySetInnerHTML={{ __html:captcha}} className='captcha' onClick={getCaptcha}></div>
+              <div dangerouslySetInnerHTML={{ __html: captcha }} className='captcha' onClick={getCaptcha}></div>
             </Col>
           </Row>
         </Form.Item>
@@ -126,7 +177,7 @@ function Index(props) {
           }}
         >
           <Button type="primary" htmlType="submit">
-            Submit
+            登录
           </Button>
         </Form.Item>
       </Form>
@@ -141,23 +192,22 @@ function Index(props) {
         wrapperCol={{
           span: 20,
         }}
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
+        onFinish={handleRegister}
         autoComplete="off"
-        ref={loginFormRef}
+        ref={registerFormRef}
       >
         <Form.Item
-          label="登录账号"
+          label="注册账号"
           name='loginId'
           rules={[
             {
               required: true,
               message: '请输入登录账号',
             },
-          ]}
+            { validator: checkRegisterId }
+          ]
+          }
+          validateTrigger='onBlur'
         >
           <Input value={registerInfo.loginId} onChange={(e) => updateInfo(registerInfo, setRegisterInfo, 'loginId', e.target.value)} />
         </Form.Item>
@@ -185,7 +235,7 @@ function Index(props) {
               />
             </Col>
             <Col span={6}>
-              <div dangerouslySetInnerHTML={{ __html:captcha}} className='captcha' onClick={getCaptcha}></div>
+              <div dangerouslySetInnerHTML={{ __html: captcha }} className='captcha' onClick={getCaptcha}></div>
             </Col>
           </Row>
         </Form.Item>
@@ -197,7 +247,7 @@ function Index(props) {
           }}
         >
           <Button type="primary" htmlType="submit">
-            Submit
+            注册
           </Button>
         </Form.Item>
       </Form>
@@ -205,7 +255,7 @@ function Index(props) {
   }
   return (
     <div className="login-form">
-      <Modal title="" open={props.openLoginForm} onOk={handleOk} onCancel={props.closeLoginForm}>
+      <Modal title="" open={props.openLoginForm} onOk={handleOk} onCancel={closeLoginForm}>
         <Radio.Group
           onChange={handleRadioChange}
           value={radioValue}

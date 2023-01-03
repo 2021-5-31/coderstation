@@ -3,17 +3,38 @@ import './index.scss'
 import { useSelector } from 'react-redux'
 import { Button, Popover, List } from 'antd';
 import { CaretRightOutlined } from '@ant-design/icons';
+import { clearUserInfo, updateLoginStatus } from '../../redux/userSlice'
+import { useDispatch } from 'react-redux'
 
 function Index(props) {
-  const { isLogin } = useSelector(state => state.user)
-  const listData = ['个人中心', '退出登录']
+  const { isLogin, userInfo } = useSelector(state => state.user)
+  const dispatch = useDispatch()
+  const listData = [
+    {
+      label: '个人中心',
+      value: 1
+    },
+    {
+      label: '退出登录',
+      value: 2
+    },
+  ]
+  const clickListItem = (value) => {
+    if (value === 1) {
+
+    } else {
+      dispatch(clearUserInfo())
+      dispatch(updateLoginStatus(false))
+      localStorage.removeItem('coderstation-user-token')
+    }
+  }
   const content = (
     <List
       itemLayout="horizontal"
       dataSource={listData}
       renderItem={(item) => (
-        <List.Item>
-          {item}
+        <List.Item className='user-list-item' onClick={() => clickListItem(item.value)}>
+          {item.label}
         </List.Item>
       )}
     />
@@ -22,7 +43,7 @@ function Index(props) {
   if (isLogin) {
     loginStatusContent = (
       <>
-        <div className="user-name">2323</div>
+        <div className="user-name">{userInfo.nickname}</div>
         <Popover content={content} placement='bottom'>
           <CaretRightOutlined className='arrow-right' />
         </Popover>
