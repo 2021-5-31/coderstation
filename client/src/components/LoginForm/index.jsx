@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Modal, Radio, Button, Checkbox, Form, Input, Row, Col, message } from 'antd'
 import { getCaptchaApi, checkRegisterIdApi, addUserApi, userLoginApi, getUserInfoApi } from '../../api/user'
 import './index.scss'
@@ -22,8 +22,7 @@ function Index(props) {
     captcha: "",
   })
   const [captcha, setCaptcha] = useState('')
-  const loginFormRef = useRef()
-  const registerFormRef = useRef()
+  const [useForm] = Form.useForm()
   const dispatch = useDispatch()
   const handleRadioChange = ({ target }) => {
     setRadioValue(target.value)
@@ -46,9 +45,9 @@ function Index(props) {
       }
     }
   }
-  // useEffect(() => {
-  //   getCaptcha()
-  // }, [props.openLoginForm])
+  useEffect(() => {
+    getCaptcha()
+  }, [props.openLoginForm])
   const handleRegister = async () => {
     const res = await addUserApi(registerInfo)
     if (res.code === 0) {
@@ -96,13 +95,14 @@ function Index(props) {
       nickname: "",
       captcha: ""
     })
+    useForm.resetFields()
     props.closeLoginForm()
   }
   let form = null
   if (radioValue === 1) {
     form = (
       <Form
-        name="basic"
+        name="loginForm"
         labelCol={{
           span: 5,
         }}
@@ -111,11 +111,11 @@ function Index(props) {
         }}
         onFinish={handleLogin}
         autoComplete="off"
-        ref={loginFormRef}
+        form={useForm}
       >
         <Form.Item
           label="登录账号"
-          name='loginId'
+          name='userInfo.loginId'
           rules={[
             {
               required: true,
@@ -128,7 +128,7 @@ function Index(props) {
 
         <Form.Item
           label="登录密码"
-          name='loginPwd'
+          name='userInfo.loginPwd'
           rules={[
             {
               required: true,
@@ -140,7 +140,7 @@ function Index(props) {
         </Form.Item>
         <Form.Item
           label="验证码"
-          name='captcha'
+          name='userInfo.captcha'
           rules={[
             {
               required: true,
@@ -161,7 +161,7 @@ function Index(props) {
         </Form.Item>
 
         <Form.Item
-          name='remember'
+          name='userInfo.remember'
           wrapperCol={{
             offset: 5,
             span: 20,
@@ -185,7 +185,7 @@ function Index(props) {
   } else {
     form = (
       <Form
-        name="basic"
+        name="RegisterForm"
         labelCol={{
           span: 5,
         }}
@@ -194,11 +194,11 @@ function Index(props) {
         }}
         onFinish={handleRegister}
         autoComplete="off"
-        ref={registerFormRef}
+        form={useForm}
       >
         <Form.Item
           label="注册账号"
-          name='loginId'
+          name='registerInfo.loginId'
           rules={[
             {
               required: true,
@@ -214,13 +214,13 @@ function Index(props) {
 
         <Form.Item
           label="用户昵称"
-          name='nickname'
+          name='registerInfo.nickname'
         >
           <Input value={registerInfo.nickname} onChange={(e) => updateInfo(registerInfo, setRegisterInfo, 'nickname', e.target.value)} />
         </Form.Item>
         <Form.Item
           label="验证码"
-          name='captcha'
+          name='registerInfo.captcha'
           rules={[
             {
               required: true,

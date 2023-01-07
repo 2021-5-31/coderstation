@@ -1,0 +1,36 @@
+.issue-container{
+  .issue-main{
+    margin-top: 10px;
+    display: flex;
+    .left-side{
+      width: 900px;
+      background-color: #fff;
+      margin-right: 10px;
+      flex: 0 0 auto;
+      .pagination{
+        margin: 10px 0;
+        display: flex;
+        justify-content: center;
+      }
+    }
+    .right-side{
+      flex: 1 1 auto;
+      .add-issue{
+        margin-bottom: 20px;
+        .add-issue-btn{
+          width: 100%;
+        }
+      }
+      .recommend{
+        .more{
+          color: #4096ff;
+        }
+      }
+      .rank{
+        .more{
+          color: green;
+        }
+      }
+    }
+  }
+}

@@ -49,3 +49,11 @@ export function resumeLoginApi() {
     method: 'get'
   })
 }
+
+// 积分前十用户
+export function getUserPointRankApi() {
+  return request({
+    url: '/api/user/pointsrank',
+    method: 'get'
+  })
+}

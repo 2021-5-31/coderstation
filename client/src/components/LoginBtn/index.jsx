@@ -5,10 +5,12 @@ import { Button, Popover, List } from 'antd';
 import { CaretRightOutlined } from '@ant-design/icons';
 import { clearUserInfo, updateLoginStatus } from '../../redux/userSlice'
 import { useDispatch } from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 
 function Index(props) {
   const { isLogin, userInfo } = useSelector(state => state.user)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const listData = [
     {
       label: '个人中心',
@@ -26,6 +28,7 @@ function Index(props) {
       dispatch(clearUserInfo())
       dispatch(updateLoginStatus(false))
       localStorage.removeItem('coderstation-user-token')
+      navigate('/')
     }
   }
   const content = (

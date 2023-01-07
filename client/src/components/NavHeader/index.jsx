@@ -8,8 +8,8 @@ function index(props) {
   return (
     <div className='header-container'>
       <div className="header">
-        <a href="">
-          <h1 className='logo'></h1>
+        <a href="/">
+          <h1 className='logo'>logo</h1>
         </a>
         <nav className='header-nav'>
           <NavLink className="header-nav-item" to='/'>问答</NavLink>

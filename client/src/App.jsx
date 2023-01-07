@@ -1,5 +1,6 @@
 import { Layout, message } from 'antd';
 import NavHeader from './components/NavHeader'
+import CommonFooter from './components/CommonFooter'
 import Router from './router'
 import LoginForm from '../src/components/LoginForm'
 import { useState, useEffect } from 'react'
@@ -46,7 +47,9 @@ function App() {
       <Content className='main'>
         <Router />
       </Content>
-      <Footer></Footer>
+      <Footer>
+        <CommonFooter />
+      </Footer>
       <LoginForm openLoginForm={isOpenLoginForm} closeLoginForm={closeLoginForm} />
     </div>
   );

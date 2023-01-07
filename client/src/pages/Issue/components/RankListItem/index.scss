@@ -1,0 +1,19 @@
+.rank-list-item{
+  .rank-order{
+    width: 30px;
+    height: 30px;
+  }
+  .user-info{
+    flex: 1 1 auto;
+    .avatar{
+      width: 24px;
+      height: 24px;
+    }
+    .username{
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}
