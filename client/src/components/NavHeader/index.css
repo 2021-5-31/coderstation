@@ -29,6 +29,7 @@
   background-size: contain;
   background-repeat: no-repeat;
   margin: 0;
+  font-size: 0;
 }
 .header-container .header .header-nav .header-nav-item{
   margin: 0 20px;

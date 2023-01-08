@@ -3,31 +3,43 @@
     display: flex;
     align-items: center;
     height: 100px;
-    border-bottom: 1px solid #ccc;
-    .answer,.scan{
+    background-color: #fff;
+    margin-bottom: 10px;
+
+    .answer,
+    .scan {
       width: 100px;
       text-align: center;
       margin-top: 10px;
-      .number{
+
+      .number {
         margin-bottom: 10px;
         color: #aaa;
       }
     }
-    .content{
+
+    .content {
       flex: 1 1 auto;
       height: 100%;
       padding: 20px 10px 0 0;
       position: relative;
-      .footer{
+
+      .title {
+        cursor: pointer;
+      }
+
+      .footer {
         width: calc(100% - 10px);
         position: absolute;
         left: 0;
         bottom: 5px;
         display: flex;
         justify-content: space-between;
-        .username-container{
+
+        .username-container {
           display: flex;
-          .date{
+
+          .date {
             display: flex;
             align-items: center;
             justify-content: center;

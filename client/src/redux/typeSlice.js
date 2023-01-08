@@ -13,10 +13,13 @@ export const getTypeList = createAsyncThunk(
 export const typeSlice = createSlice({
   name: 'type',
   initialState: {
-    typeList: []
+    typeList: [],
+    typeId: 'all'
   },
   reducers: {
-
+    updateTypeId: (state, { payload }) => {
+      state.typeId = payload
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(getTypeList.fulfilled, (state, action) => {
@@ -24,4 +27,5 @@ export const typeSlice = createSlice({
     })
   },
 })
+export const { updateTypeId } = typeSlice.actions
 export default typeSlice.reducer

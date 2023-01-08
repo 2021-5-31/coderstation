@@ -1,34 +1,44 @@
-.issue-container{
-  .issue-main{
+.issue-container {
+  .issue-type-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .issue-main {
     margin-top: 10px;
     display: flex;
-    .left-side{
+
+    .left-side {
       width: 900px;
-      background-color: #fff;
       margin-right: 10px;
       flex: 0 0 auto;
-      .pagination{
+      .issue-list-empty{
+        height: 100px;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #909497;
+      }
+      .pagination {
         margin: 10px 0;
         display: flex;
         justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        height: 100px;
       }
     }
-    .right-side{
+
+    .right-side {
       flex: 1 1 auto;
-      .add-issue{
+
+      .add-issue {
         margin-bottom: 20px;
-        .add-issue-btn{
+
+        .add-issue-btn {
           width: 100%;
-        }
-      }
-      .recommend{
-        .more{
-          color: #4096ff;
-        }
-      }
-      .rank{
-        .more{
-          color: green;
         }
       }
     }

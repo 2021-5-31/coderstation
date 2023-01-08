@@ -57,3 +57,12 @@ export function getUserPointRankApi() {
     method: 'get'
   })
 }
+
+// 修改用户
+export function updateUserInfoApi(id, data) {
+  return request({
+    url: `/api/user/${id}`,
+    method: 'patch',
+    data
+  })
+}

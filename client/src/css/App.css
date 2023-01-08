@@ -1,10 +1,15 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('../fonts/iconfont.ttf?t=1673073241539') format('truetype');
+}
+
 *{
   box-sizing: border-box;
 }
 body {
   margin: 0;
   padding: 70px 0 0 0;
-  background-color: #ccc;
+  background-color: #E5E7E9;
 }
 
 a {
@@ -155,11 +160,6 @@ li{
   font-size: 16px;
 }
 
-@font-face {
-  font-family: "iconfont"; /* Project id  */
-  src: url('../fonts/iconfont.ttf?t=1673073241539') format('truetype');
-}
-
 .iconfont {
   font-family: "iconfont" !important;
   font-size: 16px;
@@ -172,3 +172,6 @@ li{
   content: "\e6af";
 }
 
+.bc-white{
+  background-color: #fff;
+}

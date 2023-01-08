@@ -17,13 +17,18 @@ export const httpApi = (promise) => {
 }
 
 export const parseTime = (timestamp) => {
-  timestamp = +timestamp
-  const date = new Date(timestamp)
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours().toString().padStart(2, 0)
-  const minute = date.getMinutes().toString().padStart(2, 0)
-  const second = date.getSeconds().toString().padStart(2, 0)
-  return `${year}-${month}-${day} ${hour}:${minute}:${second}`
+  if (timestamp && (+timestamp) && (typeof timestamp === 'string' || typeof timestamp === 'number')) {
+    timestamp = +timestamp
+    const date = new Date(timestamp)
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const hour = date.getHours().toString().padStart(2, 0)
+    const minute = date.getMinutes().toString().padStart(2, 0)
+    const second = date.getSeconds().toString().padStart(2, 0)
+    return `${year}-${month}-${day} ${hour}:${minute}:${second}`
+  } else {
+    return ''
+  }
+
 }

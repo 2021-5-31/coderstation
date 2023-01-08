@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux'
 import { Tag } from 'antd'
 import { getUserInfoApi } from '../../api/user'
 import { parseTime } from '../../utils'
+import { useNavigate } from 'react-router-dom'
 
 function IssueListItem(props) {
   const typeList = useSelector(state => state.type.typeList)
   const [userInfo, setUserInfo] = useState({})
+  const navigate = useNavigate()
   const colorList = ['magenta', 'red', 'volcano', 'orange', 'gold', 'lime', 'green', 'cyan', 'blue', 'geekblue', 'purple']
   let colorIndex = 0
   const typeItem = typeList.find((item, index) => {
@@ -36,7 +38,7 @@ function IssueListItem(props) {
         <span className='text'>浏览</span>
       </div>
       <div className="content">
-        <div className="title">{props.issueInfo.issueTitle}</div>
+        <div className="title" onClick={()=>navigate(`/issue/detail/${props.issueInfo._id}`)}>{props.issueInfo.issueTitle}</div>
         <div className="footer">
           <div className="classification">
             <Tag color={color}>{typeItem.typeName}</Tag>

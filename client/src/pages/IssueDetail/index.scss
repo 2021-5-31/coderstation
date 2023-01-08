@@ -1,0 +1,31 @@
+.issue-detail {
+  .detail-main {
+    .left-side {
+      width: 900px;
+      flex: 0 0 auto;
+      .issue-detail-title {
+        font-weight: bold;
+        font-size: 22px;
+      }
+      .user-info{
+        margin: 20px 0;
+        color: #909497;
+        .username{
+          margin: 0 10px;
+        }
+        .publish-date{
+          margin-left: 10px;
+        }
+      }
+      .issue-content{
+        img{
+          max-width: 100%;
+        }
+      }
+    }
+
+    .right-side {
+      flex: 1 1 auto;
+    }
+  }
+}

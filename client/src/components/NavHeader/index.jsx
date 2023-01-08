@@ -9,7 +9,7 @@ function index(props) {
     <div className='header-container'>
       <div className="header">
         <a href="/">
-          <h1 className='logo'>logo</h1>
+          <h1 className='logo'>coderstation</h1>
         </a>
         <nav className='header-nav'>
           <NavLink className="header-nav-item" to='/'>问答</NavLink>
