@@ -31,16 +31,25 @@
   margin: 0;
   font-size: 0;
 }
-.header-container .header .header-nav .header-nav-item{
+
+.header-container .header .header-nav .header-nav-item {
   margin: 0 20px;
 }
-.header-container .header .header-nav .header-nav-item:hover{
+
+.header-container .header .header-nav .header-nav-item:hover {
   color: #85C1E9;
 }
-.header-container .header .header-nav .header-nav-item.active{
+
+.header-container .header .header-nav .header-nav-item.active {
   color: #85C1E9;
 }
-.header-container .header .search{
+
+.header-container .header .search {
   width: 400px;
   margin-left: 180px;
+}
+
+.header-container .header .search .ant-input-affix-wrapper {
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
 }
