@@ -1,7 +1,7 @@
 import { Layout, message } from 'antd';
 import NavHeader from './components/NavHeader'
 import CommonFooter from './components/CommonFooter'
-import Router from './router'
+import RouterBefore from './router/RouterBefore'
 import LoginForm from '../src/components/LoginForm'
 import { useState, useEffect } from 'react'
 import './css/App.css'
@@ -45,7 +45,7 @@ function App() {
         <NavHeader openLoginForm={openLoginForm} />
       </Header>
       <Content className='main'>
-        <Router />
+        <RouterBefore />
       </Content>
       <Footer>
         <CommonFooter />

@@ -1,0 +1,23 @@
+.interviews{
+  min-height: 80vh;
+  .catalogue{
+    width: 300px;
+    flex: 0 0 auto;
+    padding-top: 30px;
+    .catalogue-title{
+      font-weight: bold;
+      color: rgba(0,0,0,.8);
+    }
+  }
+  .interviews-content{
+    width: 900px;
+    flex: 0 0 auto;
+    border-left: 1px solid #ccc;
+    img{
+      width: 100%;
+    }
+    h1,h2,h3,h4,h5,h6{
+      font-weight: bold;
+    }
+  }
+}
