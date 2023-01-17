@@ -6,9 +6,6 @@ import { initUserInfo, updateLoginStatus } from '../../redux/userSlice'
 import { useDispatch } from 'react-redux'
 
 function Index(props) {
-  const handleOk = () => {
-    // setIsModalOpen(false);
-  }
   const [radioValue, setRadioValue] = useState(1)
   const [userInfo, setUserInfo] = useState({
     loginId: "",
@@ -255,7 +252,7 @@ function Index(props) {
   }
   return (
     <div className="login-form">
-      <Modal title="" open={props.openLoginForm} onOk={handleOk} onCancel={closeLoginForm}>
+      <Modal title="" open={props.openLoginForm} onCancel={closeLoginForm} footer={false}>
         <Radio.Group
           onChange={handleRadioChange}
           value={radioValue}

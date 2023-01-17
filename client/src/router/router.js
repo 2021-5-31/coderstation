@@ -6,6 +6,7 @@ import Interviews from '../pages/Interviews'
 import AddIssue from '../pages/AddIssue'
 import IssueDetail from '../pages/IssueDetail'
 import SearchResult from '../pages/SearchResult'
+import Personal from '../pages/Personal'
 
 function Router() {
   return useRoutes([
@@ -14,7 +15,8 @@ function Router() {
     { path: "interviews", element: <Interviews /> },
     { path: "add-issue", element: <AddIssue /> },
     { path: "issue/detail/:id", element: <IssueDetail /> },
-    { path: "search", element: <SearchResult /> }
+    { path: "search", element: <SearchResult /> },
+    { path: "personal", element: <Personal /> }
   ]);
 }
 

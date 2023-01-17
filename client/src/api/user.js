@@ -66,3 +66,12 @@ export function updateUserInfoApi(id, data) {
     data
   })
 }
+
+// 验证账号密码是否正确
+export function checkPasswordApi(data) {
+  return request({
+    url: '/api/user/passwordcheck',
+    method: 'post',
+    data
+  })
+}

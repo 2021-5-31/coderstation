@@ -23,7 +23,7 @@ function Index(props) {
   ]
   const clickListItem = (value) => {
     if (value === 1) {
-
+      navigate('/personal')
     } else {
       dispatch(clearUserInfo())
       dispatch(updateLoginStatus(false))
